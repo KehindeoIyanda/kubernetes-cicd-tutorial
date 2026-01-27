@@ -27,7 +27,7 @@ jobs:
             ghcr.io/kehindeoiyanda/grade-api:latest
             ghcr.io/kehindeoiyanda/grade-api:${{ github.sha }}
       - name: Update GitOps repository
-        shell: bash
+        shell: pwsh
         env:
           GIT_TOKEN: ${{ secrets.GITOPS_PAT }}
         run: |
@@ -39,7 +39,7 @@ jobs:
           rm -rf gitops
           
           # Clone repository using HTTPS URL without token
-          git clone https://github.com/rslim087a/grade-api-gitops.git gitops
+          git clone https://github.com/kehindeoiyanda/grade-api-gitops.git gitops
           cd gitops
           
           sed -i "s|image: ghcr.io/.*:.*|image: ghcr.io/kehindeoiyanda/grade-api:${{ github.sha }}|g" deployment.yaml
